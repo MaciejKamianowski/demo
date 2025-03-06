@@ -1,9 +1,9 @@
 package kamianowski.maciej.demo.rest;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Branch {
-	@SerializedName("name")
+	@JsonProperty("name")
     private String branchName;
 
     public Branch(String branchName) {

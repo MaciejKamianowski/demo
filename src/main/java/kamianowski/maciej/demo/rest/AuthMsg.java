@@ -1,26 +1,33 @@
 package kamianowski.maciej.demo.rest;
 
-import com.google.gson.annotations.SerializedName;
-
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class AuthMsg {
 	
-    @SerializedName("name")
-    private String repository; // Repository name
+	@JsonProperty("name")
+    private String repository;
 
-    @SerializedName("owner")
-    private Owner owner; // Nested owner object
+    @JsonProperty("owner")
+    private Owner owner;
 
-    @SerializedName("fork")
-    private boolean isFork; // Whether the repository is a fork
+    @JsonProperty("branches")
+    private List<Branch> branches;
     
-    private List<Branch> branches; // List of branches (not directly in the JSON, needs to be fetched separately)
+    @JsonProperty("fork")
+    private boolean isFork;
+    
+    public AuthMsg(String repository, Owner owner, List<Branch> branches, boolean isFork) {
+		this.repository = repository;
+		this.owner = owner;
+		this.branches = branches;
+		this.isFork = isFork;
+	}
 
-    public static class Owner {
-        @SerializedName("login")
-        private String ownerName; // Owner's login/username
+	public static class Owner {
+		@JsonProperty("login")
+        private String ownerName; 
 
 		public String getOwnerName() {
 			return ownerName;
@@ -29,13 +36,11 @@ public class AuthMsg {
 		public void setOwnerName(String ownerName) {
 			this.ownerName = ownerName;
 		}
-        
+
+		public Owner(String ownerName) {
+			this.ownerName = ownerName;
+		} 
     }
-//
-//    public static class Branch {
-//        @SerializedName("name")
-//        private String branchName; // Branch name
-//    }
 
 	public String getRepository() {
 		return repository;
@@ -67,36 +72,5 @@ public class AuthMsg {
 
 	public void setBranches(List<Branch> branches) {
 		this.branches = branches;
-	}
-    
+	}	
 }
-
-
-
-//@Getter
-//@Setter
-//public class AuthMsg {
-//	//"name" which is in json what we get from url
-//	@SerializedName("name")
-//	private String repository;
-//
-//	@SerializedName("name")
-//	private String owner;
-//	/**
-//	 * @return the repository
-//	 */
-////	public String getRepository() {
-////	    return repository;
-////	}
-////
-////	/**
-////	 * @param repository the repository to set
-////	 */
-////	public void setRepository(String repository) {
-////	    this.repository = repository;
-////	}
-//	
-//	
-//	
-//
-//}

@@ -2,11 +2,18 @@ package kamianowski.maciej.demo.rest;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class RepositoryDto {
 
+	@JsonProperty("repositoryName")
 	private String repositoryName;
+	@JsonProperty("ownerName")
     private String ownerName;
+	@JsonProperty("branches")
     private List<Branch> branches;
+
+	public RepositoryDto() {}
 
 	public RepositoryDto(String repository, String ownerName, List<Branch> branches) {
 		this.repositoryName = repository;
@@ -37,14 +44,5 @@ public class RepositoryDto {
 	public void setBranches(List<Branch> branches) {
 		this.branches = branches;
 	}
-
-	@Override
-    public String toString() {
-        return "RepositoryDto{" +
-                "repositoryName='" + repositoryName + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", branches=" + branches +
-                '}';
-    }
-
+	
 }
